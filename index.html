@@ -43,7 +43,7 @@
         </div>
         <div class="design-vision-copy">
           <h2 class="design-vision-heading">A calmer way to show design work.</h2>
-          <div class="design-vision-text"><p>Plainframe is for portfolios that do not need noise. It gives the work room to breathe, keeps navigation light, and makes project writing easier to scan.</p><p>The structure is simple: one homepage, one about page, one projects index, and one file per project. That makes it easy to edit without turning the site into a CMS problem.</p></div>
+          <div class="design-vision-text"><p>Plainframe is for portfolios that do not need noise. It gives the work room to breathe, keeps navigation light, and makes project writing easier to scan.</p><p>The structure is simple: one homepage, one projects index, one project file per case study, and two small profile panels for CV and About. That keeps editing lightweight without turning the site into a CMS problem.</p></div>
         </div>
       </div>
       <a href="#design-id" class="design-hero-scroll" aria-label="Scroll down">
@@ -53,7 +53,7 @@
         </svg>
       </a>
     </section>
-    <h1 id="design-id" class="works-page-heading">OBJECTS</h1>
+    <h1 id="design-id" class="works-page-heading">FEATURED</h1>
 <div class="design-project-grid">
   <div class="design-project-grid-item">
     <a href="./projects/quiet-material/index.html" class="design-unified-card">
@@ -86,7 +86,7 @@
     </a>
   </div>
 </div>
-    <h1 id="design-software" class="works-page-heading">INTERFACES</h1>
+    <h1 id="design-software" class="works-page-heading">DIGITAL</h1>
 <div class="design-project-grid">
   <div class="design-project-grid-item">
     <a href="./projects/soft-signals/index.html" class="design-unified-card">
@@ -119,7 +119,7 @@
     </a>
   </div>
 </div>
-    <h1 id="design-installations" class="works-page-heading">INSTALLATIONS</h1>
+    <h1 id="design-installations" class="works-page-heading">SPATIAL</h1>
 <div class="design-project-grid">
   <div class="design-project-grid-item">
     <a href="./projects/paper-room/index.html" class="design-unified-card">
@@ -159,21 +159,133 @@
 </div>
 <footer class="design-ekphrasis-footer">
   <div class="design-ekphrasis-footer-left">
-    <a href="#works-head" class="design-ekphrasis-logo-link" aria-label="Back to hero">
-      <div class="design-ekphrasis-logo-mark">P</div>
-    </a>
     <div class="design-ekphrasis-wordmark">Plainframe</div>
   </div>
   <div class="design-ekphrasis-footer-center">
     <a href="#design-vision" class="design-ekphrasis-link">Vision</a>
-    <a href="#design-id" class="design-ekphrasis-link">Objects</a>
-    <a href="#design-software" class="design-ekphrasis-link">Interfaces</a>
-    <a href="#design-installations" class="design-ekphrasis-link">Installations</a>
+    <a href="#design-id" class="design-ekphrasis-link">FEATURED</a>
+    <a href="#design-software" class="design-ekphrasis-link">DIGITAL</a>
+    <a href="#design-installations" class="design-ekphrasis-link">SPATIAL</a>
   </div>
   <div class="design-ekphrasis-footer-right">
-    <a href="./about/index.html" class="design-ekphrasis-link">About</a>
-    <a href="https://github.com/bobtianqiwei/plainframe" target="_blank" rel="noreferrer" class="design-ekphrasis-link">github.com/bobtianqiwei/plainframe</a>
+    <button type="button" class="design-ekphrasis-link" data-design-cv-open>CV</button>
+    <button type="button" class="design-ekphrasis-link" data-design-about-open>About</button>
   </div>
+  <p class="design-built-with">Built with <a href="https://github.com/bobtianqiwei/plainframe" target="_blank" rel="noreferrer">github.com/bobtianqiwei/plainframe</a></p>
 </footer>
+  <div class="design-about-modal-overlay" data-design-about-modal>
+    <div class="design-about-modal" role="dialog" aria-modal="true" aria-labelledby="design-about-title">
+      <button type="button" class="design-about-modal-close" aria-label="Close" data-design-about-close>&times;</button>
+      <div class="design-about-modal-grid">
+        <div>
+          <h2 id="design-about-title" class="design-about-name">Avery Lin</h2>
+          <p class="design-about-bio">Avery Lin designs digital products, brand systems, and spatial graphics. Their work focuses on visual clarity, editorial rhythm, and interfaces that feel precise without feeling cold.</p>
+          <p class="design-about-email"><a href="mailto:hello@example.com">hello@example.com</a></p>
+          <p class="design-about-link"><a href="https://example.com" target="_blank" rel="noreferrer">averylin.studio</a></p>
+          <p class="design-about-note">Use these panels for a short biography and a compact CV without adding extra pages.</p>
+          <p class="design-built-with design-built-with-modal">Built with <a href="https://github.com/bobtianqiwei/plainframe" target="_blank" rel="noreferrer">github.com/bobtianqiwei/plainframe</a></p>
+        </div>
+        <div class="design-about-sections">
+          <section class="design-about-section">
+            <h3 class="design-about-section-title">Practice</h3>
+            <div class="design-about-section-copy"><p>Avery works across product design, visual systems, and art direction. The through-line is a preference for calm compositions, readable hierarchy, and work that still feels human at the edges.</p><p>They often move between interface design, editorial structure, deck design, exhibition graphics, and visual identity systems.</p></div>
+          </section>
+          <section class="design-about-section">
+            <h3 class="design-about-section-title">Approach</h3>
+            <div class="design-about-section-copy"><p>The goal is not minimalism for its own sake. The goal is to remove distraction so the work can speak in a clearer voice.</p><p>That means spacing, sequencing, typography, and image selection all matter as much as the finished mockups.</p></div>
+          </section>
+          <section class="design-about-section">
+            <h3 class="design-about-section-title">Contact</h3>
+            <div class="design-about-section-copy"><p>Plainframe keeps contact information straightforward. Designers often need a site that feels finished without hiding practical details behind too many layers.</p><p>Use this page for biography, collaborators, teaching, writing, or any context that does not belong on the homepage.</p></div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="design-about-modal-overlay" data-design-cv-modal>
+    <div class="design-cv-modal" role="dialog" aria-modal="true" aria-labelledby="design-cv-title">
+      <button type="button" class="design-cv-modal-close" aria-label="Close" data-design-cv-close>&times;</button>
+      <div class="design-cv-grid">
+        <div class="design-cv-section">
+          <h3 id="design-cv-title" class="design-cv-section-title">Practice</h3>
+          <p class="design-cv-item"><strong>Independent designer</strong>Visual systems, digital products, and editorial direction</p>
+          <p class="design-cv-item"><strong>Plainframe</strong>Minimal design portfolio template for calm, work-first presentation</p>
+        </div>
+        <div class="design-cv-section">
+          <h3 class="design-cv-section-title">Contact</h3>
+          <p class="design-cv-item"><strong>Email</strong>hello@example.com</p>
+          <p class="design-cv-item"><strong>Location</strong>Brooklyn, New York</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var aboutOpen = document.querySelector("[data-design-about-open]");
+  var aboutModal = document.querySelector("[data-design-about-modal]");
+  var aboutClose = document.querySelector("[data-design-about-close]");
+  var cvOpen = document.querySelector("[data-design-cv-open]");
+  var cvModal = document.querySelector("[data-design-cv-modal]");
+  var cvClose = document.querySelector("[data-design-cv-close]");
+
+  function openModal(modal) {
+    if (!modal) {
+      return;
+    }
+    modal.classList.add("show");
+    document.body.classList.add("design-modal-open");
+  }
+
+  function closeModal(modal) {
+    if (!modal) {
+      return;
+    }
+    modal.classList.remove("show");
+    if (!document.querySelector(".design-about-modal-overlay.show")) {
+      document.body.classList.remove("design-modal-open");
+    }
+  }
+
+  if (aboutOpen && aboutModal && aboutClose) {
+    aboutOpen.addEventListener("click", function () {
+      openModal(aboutModal);
+    });
+
+    aboutClose.addEventListener("click", function () {
+      closeModal(aboutModal);
+    });
+
+    aboutModal.addEventListener("click", function (event) {
+      if (event.target === aboutModal) {
+        closeModal(aboutModal);
+      }
+    });
+  }
+
+  if (cvOpen && cvModal && cvClose) {
+    cvOpen.addEventListener("click", function () {
+      openModal(cvModal);
+    });
+
+    cvClose.addEventListener("click", function () {
+      closeModal(cvModal);
+    });
+
+    cvModal.addEventListener("click", function (event) {
+      if (event.target === cvModal) {
+        closeModal(cvModal);
+      }
+    });
+  }
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key !== "Escape") {
+      return;
+    }
+    closeModal(aboutModal);
+    closeModal(cvModal);
+  });
+});
+</script>
 </body>
 </html>

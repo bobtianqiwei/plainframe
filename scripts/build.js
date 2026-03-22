@@ -54,6 +54,10 @@ function resolveAsset(relativePath, assetPath) {
   return `${prefix}/${assetPath}`.replace(/\/\.\//g, "/");
 }
 
+function getPrimaryEmail() {
+  return siteConfig.contact.find((item) => item.href && item.href.startsWith("mailto:")) || null;
+}
+
 function renderParagraphs(paragraphs) {
   return (paragraphs || [])
     .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
@@ -97,33 +101,166 @@ ${items
 </div>`;
 }
 
+function renderFooterNav(relativePath) {
+  const visionHref = relativePath === "index.html" ? "#design-vision" : resolveHref(relativePath, "index.html#design-vision");
+
+  return [
+    `<a href="${escapeHtml(visionHref)}" class="design-ekphrasis-link">Vision</a>`,
+    ...siteConfig.homeSections.map(
+      (section) => {
+        const sectionHref = relativePath === "index.html" ? `#${section.id}` : resolveHref(relativePath, `index.html#${section.id}`);
+        return `<a href="${escapeHtml(sectionHref)}" class="design-ekphrasis-link">${escapeHtml(section.title)}</a>`;
+      }
+    )
+  ].join("\n    ");
+}
+
+function renderProfileModals(relativePath) {
+  const email = getPrimaryEmail();
+  const websiteHref = siteConfig.modalProfile?.websiteHref;
+  const websiteLabel = siteConfig.modalProfile?.websiteLabel;
+
+  return `  <div class="design-about-modal-overlay" data-design-about-modal>
+    <div class="design-about-modal" role="dialog" aria-modal="true" aria-labelledby="design-about-title">
+      <button type="button" class="design-about-modal-close" aria-label="Close" data-design-about-close>&times;</button>
+      <div class="design-about-modal-grid">
+        <div>
+          <h2 id="design-about-title" class="design-about-name">${escapeHtml(siteConfig.designer.name)}</h2>
+          <p class="design-about-bio">${escapeHtml(siteConfig.designer.bio)}</p>
+${email ? `          <p class="design-about-email"><a href="${escapeHtml(email.href)}">${escapeHtml(email.value)}</a></p>` : ""}
+${websiteHref && websiteLabel ? `          <p class="design-about-link"><a href="${escapeHtml(websiteHref)}" target="_blank" rel="noreferrer">${escapeHtml(websiteLabel)}</a></p>` : ""}
+${siteConfig.modalProfile?.note ? `          <p class="design-about-note">${escapeHtml(siteConfig.modalProfile.note)}</p>` : ""}
+          ${renderBuiltWith(relativePath, "design-built-with design-built-with-modal")}
+        </div>
+        <div class="design-about-sections">
+${siteConfig.aboutPage.sections
+  .map(
+    (section) => `          <section class="design-about-section">
+            <h3 class="design-about-section-title">${escapeHtml(section.title)}</h3>
+            <div class="design-about-section-copy">${renderParagraphs(section.paragraphs)}</div>
+          </section>`
+  )
+  .join("\n")}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="design-about-modal-overlay" data-design-cv-modal>
+    <div class="design-cv-modal" role="dialog" aria-modal="true" aria-labelledby="design-cv-title">
+      <button type="button" class="design-cv-modal-close" aria-label="Close" data-design-cv-close>&times;</button>
+      <div class="design-cv-grid">
+${siteConfig.cvSections
+  .map(
+    (section, index) => `        <div class="design-cv-section">
+          <h3${index === 0 ? ' id="design-cv-title"' : ""} class="design-cv-section-title">${escapeHtml(section.title)}</h3>
+${section.items
+  .map(
+    (item) => `          <p class="design-cv-item"><strong>${escapeHtml(item.heading)}</strong>${escapeHtml(item.body)}</p>`
+  )
+  .join("\n")}
+        </div>`
+  )
+  .join("\n")}
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderModalScript() {
+  return `<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var aboutOpen = document.querySelector("[data-design-about-open]");
+  var aboutModal = document.querySelector("[data-design-about-modal]");
+  var aboutClose = document.querySelector("[data-design-about-close]");
+  var cvOpen = document.querySelector("[data-design-cv-open]");
+  var cvModal = document.querySelector("[data-design-cv-modal]");
+  var cvClose = document.querySelector("[data-design-cv-close]");
+
+  function openModal(modal) {
+    if (!modal) {
+      return;
+    }
+    modal.classList.add("show");
+    document.body.classList.add("design-modal-open");
+  }
+
+  function closeModal(modal) {
+    if (!modal) {
+      return;
+    }
+    modal.classList.remove("show");
+    if (!document.querySelector(".design-about-modal-overlay.show")) {
+      document.body.classList.remove("design-modal-open");
+    }
+  }
+
+  if (aboutOpen && aboutModal && aboutClose) {
+    aboutOpen.addEventListener("click", function () {
+      openModal(aboutModal);
+    });
+
+    aboutClose.addEventListener("click", function () {
+      closeModal(aboutModal);
+    });
+
+    aboutModal.addEventListener("click", function (event) {
+      if (event.target === aboutModal) {
+        closeModal(aboutModal);
+      }
+    });
+  }
+
+  if (cvOpen && cvModal && cvClose) {
+    cvOpen.addEventListener("click", function () {
+      openModal(cvModal);
+    });
+
+    cvClose.addEventListener("click", function () {
+      closeModal(cvModal);
+    });
+
+    cvModal.addEventListener("click", function (event) {
+      if (event.target === cvModal) {
+        closeModal(cvModal);
+      }
+    });
+  }
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key !== "Escape") {
+      return;
+    }
+    closeModal(aboutModal);
+    closeModal(cvModal);
+  });
+});
+</script>`;
+}
+
+function renderBuiltWith(relativePath, className = "design-built-with") {
+  return `<p class="${className}">Built with <a href="${escapeHtml(resolveHref(relativePath, "https://github.com/bobtianqiwei/plainframe"))}" target="_blank" rel="noreferrer">github.com/bobtianqiwei/plainframe</a></p>`;
+}
+
 function renderHomeFooter(relativePath) {
   return `<footer class="design-ekphrasis-footer">
   <div class="design-ekphrasis-footer-left">
-    <a href="#works-head" class="design-ekphrasis-logo-link" aria-label="Back to hero">
-      <div class="design-ekphrasis-logo-mark">P</div>
-    </a>
     <div class="design-ekphrasis-wordmark">Plainframe</div>
   </div>
   <div class="design-ekphrasis-footer-center">
-    <a href="#design-vision" class="design-ekphrasis-link">Vision</a>
-    <a href="#design-id" class="design-ekphrasis-link">Objects</a>
-    <a href="#design-software" class="design-ekphrasis-link">Interfaces</a>
-    <a href="#design-installations" class="design-ekphrasis-link">Installations</a>
+    ${renderFooterNav(relativePath)}
   </div>
   <div class="design-ekphrasis-footer-right">
-    <a href="${escapeHtml(resolveHref(relativePath, "about/index.html"))}" class="design-ekphrasis-link">About</a>
-    <a href="${escapeHtml(resolveHref(relativePath, siteConfig.site.footerLinkHref))}" target="_blank" rel="noreferrer" class="design-ekphrasis-link">${escapeHtml(siteConfig.site.footerLinkLabel)}</a>
+    <button type="button" class="design-ekphrasis-link" data-design-cv-open>CV</button>
+    <button type="button" class="design-ekphrasis-link" data-design-about-open>About</button>
   </div>
-</footer>`;
+  ${renderBuiltWith(relativePath)}
+</footer>
+${renderProfileModals(relativePath)}`;
 }
 
 function renderProjectFooter(relativePath) {
   return `<footer class="design-ekphrasis-footer">
   <div class="design-ekphrasis-footer-left">
-    <a href="${escapeHtml(resolveHref(relativePath, "index.html"))}" class="design-ekphrasis-logo-link" aria-label="Back to design index">
-      <div class="design-ekphrasis-logo-mark">P</div>
-    </a>
     <div class="design-ekphrasis-wordmark">Plainframe</div>
     <a href="${escapeHtml(resolveHref(relativePath, "index.html"))}" class="design-ekphrasis-link design-ekphrasis-link-icon design-project-back" aria-label="BACK TO DESIGN">
       <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -132,16 +269,15 @@ function renderProjectFooter(relativePath) {
     </a>
   </div>
   <div class="design-ekphrasis-footer-center">
-    <a href="${escapeHtml(resolveHref(relativePath, "index.html#design-vision"))}" class="design-ekphrasis-link">Vision</a>
-    <a href="${escapeHtml(resolveHref(relativePath, "index.html#design-id"))}" class="design-ekphrasis-link">Objects</a>
-    <a href="${escapeHtml(resolveHref(relativePath, "index.html#design-software"))}" class="design-ekphrasis-link">Interfaces</a>
-    <a href="${escapeHtml(resolveHref(relativePath, "index.html#design-installations"))}" class="design-ekphrasis-link">Installations</a>
+    ${renderFooterNav(relativePath)}
   </div>
   <div class="design-ekphrasis-footer-right">
-    <a href="${escapeHtml(resolveHref(relativePath, "about/index.html"))}" class="design-ekphrasis-link">About</a>
-    <a href="${escapeHtml(resolveHref(relativePath, siteConfig.site.footerLinkHref))}" target="_blank" rel="noreferrer" class="design-ekphrasis-link">${escapeHtml(siteConfig.site.footerLinkLabel)}</a>
+    <button type="button" class="design-ekphrasis-link" data-design-cv-open>CV</button>
+    <button type="button" class="design-ekphrasis-link" data-design-about-open>About</button>
   </div>
-</footer>`;
+  ${renderBuiltWith(relativePath)}
+</footer>
+${renderProfileModals(relativePath)}`;
 }
 
 function pageShell({ relativePath, title, description, bodyAttributes = "", bodyClass = "", body }) {
@@ -166,6 +302,7 @@ function pageShell({ relativePath, title, description, bodyAttributes = "", body
 </head>
 <body${bodyAttributes ? ` ${bodyAttributes}` : ""} class="${escapeHtml(bodyClass)}">
 ${body}
+${renderModalScript()}
 </body>
 </html>
 `;
@@ -236,43 +373,6 @@ ${siteConfig.testimonials
   </article>
 </div>
 ${renderHomeFooter(relativePath)}`
-  });
-}
-
-function renderAbout() {
-  const relativePath = "about/index.html";
-
-  return pageShell({
-    relativePath,
-    title: `About | ${siteConfig.site.title}`,
-    description: siteConfig.aboutPage.headline,
-    bodyClass: "design-project-page",
-    body: `<div class="design-project-shell design-project-page">
-  <main class="design-project-main">
-    <header class="design-project-header">
-      <div>
-        <h1 class="design-project-title">${escapeHtml(siteConfig.designer.name)}</h1>
-        <p class="design-project-headline">${escapeHtml(siteConfig.aboutPage.headline)}</p>
-      </div>
-      <div>
-        <p class="design-project-meta">${escapeHtml(siteConfig.designer.role)}<br>${escapeHtml(siteConfig.designer.location)}<br>${escapeHtml(siteConfig.contact[0].value)}</p>
-      </div>
-    </header>
-${siteConfig.aboutPage.sections
-  .map(
-    (section) => `    <section class="design-project-section">
-      <div class="design-project-section-head">
-        <h2 class="design-project-section-title">${escapeHtml(section.title)}</h2>
-      </div>
-      <div class="design-project-section-body">
-        <div class="design-project-richtext">${renderParagraphs(section.paragraphs)}</div>
-      </div>
-    </section>`
-  )
-  .join("\n")}
-  </main>
-${renderProjectFooter(relativePath)}
-</div>`
   });
 }
 
@@ -362,7 +462,6 @@ function main() {
   fs.rmSync(path.join(repoRoot, "about"), { recursive: true, force: true });
 
   writeFile("index.html", renderHome(projects));
-  writeFile("about/index.html", renderAbout());
   writeFile("projects/index.html", renderProjectsIndex(projects));
 
   projects.forEach((project) => {

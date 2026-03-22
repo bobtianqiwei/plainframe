@@ -4,10 +4,7 @@ module.exports = {
     title: "Plainframe",
     metaTitle: "Plainframe | Minimal Design Portfolio Template",
     metaDescription:
-      "A minimal design portfolio template for designers who want a calm layout, strong typography, and a work-first homepage.",
-    footerLabel: "Built from",
-    footerLinkLabel: "github.com/bobtianqiwei/plainframe",
-    footerLinkHref: "https://github.com/bobtianqiwei/plainframe"
+      "A minimal design portfolio template for designers who want a calm layout, strong typography, and a work-first homepage."
   },
   navLinks: [
     { label: "Work", href: "projects/index.html" },
@@ -37,7 +34,7 @@ module.exports = {
     title: "A calmer way to show design work.",
     paragraphs: [
       "Plainframe is for portfolios that do not need noise. It gives the work room to breathe, keeps navigation light, and makes project writing easier to scan.",
-      "The structure is simple: one homepage, one about page, one projects index, and one file per project. That makes it easy to edit without turning the site into a CMS problem."
+      "The structure is simple: one homepage, one projects index, one project file per case study, and two small profile panels for CV and About. That keeps editing lightweight without turning the site into a CMS problem."
     ]
   },
   designer: {
@@ -46,6 +43,11 @@ module.exports = {
     location: "Brooklyn, New York",
     bio:
       "Avery Lin designs digital products, brand systems, and spatial graphics. Their work focuses on visual clarity, editorial rhythm, and interfaces that feel precise without feeling cold."
+  },
+  modalProfile: {
+    websiteLabel: "averylin.studio",
+    websiteHref: "https://example.com",
+    note: "Use these panels for a short biography and a compact CV without adding extra pages."
   },
   testimonials: [
     {
@@ -62,7 +64,7 @@ module.exports = {
   homeSections: [
     {
       id: "design-id",
-      title: "OBJECTS",
+      title: "FEATURED",
       featureRows: [
         ["quiet-material", "archive-grid"]
       ],
@@ -74,7 +76,7 @@ module.exports = {
     },
     {
       id: "design-software",
-      title: "INTERFACES",
+      title: "DIGITAL",
       featureRows: [
         ["soft-signals", "archive-grid"]
       ],
@@ -86,7 +88,7 @@ module.exports = {
     },
     {
       id: "design-installations",
-      title: "INSTALLATIONS",
+      title: "SPATIAL",
       columns: [
         ["paper-room"],
         ["north-window"],

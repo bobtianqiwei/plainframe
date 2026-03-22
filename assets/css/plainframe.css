@@ -1,0 +1,530 @@
+/* plainframe.css developed by Bob Tianqi Wei */
+
+body.design-portfolio-page,
+body.design-project-page {
+  --design-footer-height: 52px;
+  background: #f5f5f5;
+  color: #111;
+  margin: 0;
+}
+
+body.design-portfolio-page {
+  overflow: hidden;
+}
+
+body.design-portfolio-page .design-portfolio-scroll {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: var(--design-footer-height);
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  background: #f5f5f5;
+}
+
+body.design-portfolio-page .design-hero {
+  position: relative;
+  min-height: calc(100vh - var(--design-footer-height));
+  padding: 48px 24px;
+  box-sizing: border-box;
+}
+
+body.design-portfolio-page .design-hero.design-hero-compact {
+  min-height: auto;
+  padding-bottom: 12px;
+}
+
+body.design-portfolio-page .design-hero-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  width: min(1120px, calc(100vw - 72px));
+}
+
+body.design-portfolio-page .design-hero.design-hero-compact .design-hero-inner {
+  position: static;
+  transform: none;
+  margin: 0 auto;
+  width: min(1120px, 100%);
+}
+
+body.design-portfolio-page .design-hero-eyebrow {
+  margin: 0;
+  color: #777;
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+body.design-portfolio-page .design-hero-title {
+  margin: 0;
+  color: #4a4a4a;
+  text-align: left;
+  font-size: 92px;
+  font-weight: 100;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+body.design-portfolio-page .design-hero-title-line {
+  display: block;
+}
+
+body.design-portfolio-page .design-hero-name {
+  margin: 0;
+  color: #333;
+  align-self: stretch;
+  text-align: right;
+  font-size: 30px;
+  font-weight: 200;
+  line-height: 1.3;
+}
+
+body.design-portfolio-page .design-hero-scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 64px;
+  color: #7a7a7a;
+  text-decoration: none;
+}
+
+body.design-portfolio-page .design-hero-scroll svg {
+  width: 10px;
+  height: 40px;
+}
+
+body.design-portfolio-page .design-vision,
+body.design-portfolio-page .design-testimonials,
+body.design-portfolio-page .design-work {
+  min-height: calc(100vh - var(--design-footer-height));
+  display: flex;
+  align-items: center;
+  padding: 56px 48px 88px;
+  box-sizing: border-box;
+}
+
+body.design-portfolio-page .design-work.design-work-listing {
+  min-height: auto;
+  padding-top: 12px;
+}
+
+body.design-portfolio-page .design-vision-grid,
+body.design-portfolio-page .design-work-inner,
+body.design-portfolio-page .design-testimonials-inner {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+body.design-portfolio-page .design-vision-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: 36px;
+  align-items: start;
+}
+
+body.design-portfolio-page .design-vision-image {
+  display: block;
+  width: 100%;
+  max-height: calc(100vh - var(--design-footer-height) - 220px);
+  object-fit: cover;
+}
+
+body.design-portfolio-page .design-vision-heading {
+  margin: 0 0 16px;
+  color: #333;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: .04em;
+}
+
+body.design-portfolio-page .design-vision-text,
+body.design-portfolio-page .design-vision-text p {
+  margin: 0;
+  color: #333;
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+body.design-portfolio-page .design-testimonials-heading {
+  margin: 0 0 36px;
+  color: #333;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: .04em;
+}
+
+body.design-portfolio-page .design-testimonials-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+body.design-portfolio-page .design-testimonial {
+  padding-top: 18px;
+  border-top: 1px solid #d9d9d9;
+}
+
+body.design-portfolio-page .design-testimonial-quote {
+  margin: 0 0 16px;
+  color: #2f2f2f;
+  font-size: 28px;
+  font-weight: 200;
+  line-height: 1.2;
+}
+
+body.design-portfolio-page .design-testimonial-credit {
+  margin: 0;
+  color: #666;
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+body.design-portfolio-page .design-project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-bottom: 56px;
+}
+
+body.design-portfolio-page .design-project-grid-item > a.design-unified-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: #ddd;
+}
+
+body.design-portfolio-page .design-project-grid-item > a.design-unified-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  filter: saturate(0.18);
+  transition: filter .25s ease;
+}
+
+body.design-portfolio-page .design-project-grid-item > a.design-unified-card:hover img {
+  filter: saturate(1);
+}
+
+body.design-portfolio-page .design-card-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.15;
+  text-shadow: 0 6px 40px rgba(0, 0, 0, 0.92), 0 2px 14px rgba(0, 0, 0, 0.98);
+  opacity: 0;
+  transition: opacity .2s ease;
+  pointer-events: none;
+}
+
+body.design-portfolio-page .design-project-grid-item > a.design-unified-card:hover .design-card-overlay {
+  opacity: 1;
+}
+
+.design-project-shell {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.design-project-main {
+  width: min(1080px, calc(100% - 64px));
+  margin: 0 auto;
+  padding: 100px 0 calc(72px + var(--design-footer-height));
+}
+
+.design-project-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(240px, 0.65fr);
+  gap: 32px;
+  align-items: start;
+  margin-bottom: 48px;
+}
+
+.design-project-header > div:last-child {
+  justify-self: end;
+}
+
+.design-project-title {
+  margin: 0;
+  color: #111;
+  font-size: 56px;
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.design-project-headline {
+  margin: 16px 0 0;
+  color: #333;
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+.design-project-meta {
+  margin: 0;
+  color: #666;
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.project-figure,
+.design-project-hero {
+  margin: 0 0 40px;
+}
+
+.design-project-gallery-image {
+  display: block;
+  width: 100%;
+}
+
+.design-project-section {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 28px;
+  padding-top: 28px;
+  margin-top: 28px;
+  border-top: 1px solid #e7e7e7;
+}
+
+.design-project-section-title {
+  margin: 0;
+  color: #222;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+
+.design-project-richtext,
+.design-project-richtext p,
+.image-description {
+  color: #333;
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.design-project-richtext p:first-child {
+  margin-top: 0;
+}
+
+.design-project-richtext p:last-child {
+  margin-bottom: 0;
+}
+
+.design-ekphrasis-footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  height: var(--design-footer-height);
+  padding: 12px 24px;
+  border-top: 1px solid #eee;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.design-ekphrasis-footer-left,
+.design-ekphrasis-footer-center,
+.design-ekphrasis-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.design-ekphrasis-footer-left {
+  flex: 1;
+  justify-content: flex-start;
+}
+
+.design-ekphrasis-footer-center {
+  flex: 1;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.design-ekphrasis-footer-right {
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.design-ekphrasis-logo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  text-decoration: none;
+}
+
+.design-ekphrasis-logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid #ccc;
+  color: #333;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.design-ekphrasis-wordmark {
+  color: #333;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.design-ekphrasis-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 4px 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.2;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.design-ekphrasis-link:hover,
+.design-hero-scroll:hover {
+  background: #f5f5f5;
+  color: #333;
+}
+
+@media screen and (max-width: 767px) {
+  body.design-portfolio-page {
+    --design-footer-height: 96px;
+  }
+
+  body.design-portfolio-page .design-portfolio-scroll {
+    bottom: var(--design-footer-height);
+  }
+
+  body.design-portfolio-page .design-hero,
+  body.design-portfolio-page .design-vision,
+  body.design-portfolio-page .design-testimonials,
+  body.design-portfolio-page .design-work {
+    min-height: auto;
+    padding: 28px 16px 48px;
+  }
+
+  body.design-portfolio-page .design-hero-inner {
+    position: static;
+    transform: none;
+    width: 100%;
+  }
+
+  body.design-portfolio-page .design-hero-title {
+    font-size: 52px;
+    white-space: normal;
+  }
+
+  body.design-portfolio-page .design-hero-name {
+    font-size: 20px;
+    text-align: left;
+  }
+
+  body.design-portfolio-page .design-vision-grid,
+  body.design-portfolio-page .design-testimonials-list,
+  body.design-portfolio-page .design-project-grid,
+  .design-project-header,
+  .design-project-section {
+    grid-template-columns: 1fr;
+  }
+
+  .design-project-main {
+    width: calc(100% - 32px);
+    padding: 28px 0 calc(48px + var(--design-footer-height));
+  }
+
+  .design-project-title {
+    font-size: 38px;
+  }
+
+  .design-project-headline,
+  .design-project-richtext,
+  .design-project-richtext p {
+    font-size: 14px;
+  }
+
+  .design-project-section-title {
+    font-size: 16px;
+  }
+
+  .design-ekphrasis-footer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: 10px 12px;
+    height: var(--design-footer-height);
+    padding: 10px 14px 12px;
+  }
+
+  .design-ekphrasis-footer-left {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .design-ekphrasis-footer-center {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: flex-start;
+  }
+
+  .design-ekphrasis-footer-right {
+    grid-column: 2;
+    grid-row: 1;
+    justify-content: flex-end;
+  }
+}

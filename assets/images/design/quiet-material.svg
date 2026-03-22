@@ -1,0 +1,11 @@
+<!-- quiet-material.svg developed by Bob Tianqi Wei -->
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1200" fill="#F3EFE8"/>
+  <rect x="86" y="86" width="1428" height="1028" fill="#F8F5F0" stroke="#D6D0C6" stroke-width="4"/>
+  <text x="122" y="190" fill="#1A1A1A" font-family="Helvetica, Arial, sans-serif" font-size="48">Quiet Material</text>
+  <text x="122" y="248" fill="#7A746B" font-family="Helvetica, Arial, sans-serif" font-size="24">Brand system / Editorial direction</text>
+  <rect x="122" y="340" width="1356" height="520" fill="#E4DED4"/>
+  <rect x="980" y="340" width="498" height="520" fill="#D3CCC0"/>
+  <line x1="122" y1="924" x2="1478" y2="924" stroke="#C7C0B6" stroke-width="2"/>
+  <text x="122" y="980" fill="#5E5A54" font-family="Helvetica, Arial, sans-serif" font-size="28">Texture, spacing, and an editorial surface with room to breathe.</text>
+</svg>

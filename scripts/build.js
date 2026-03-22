@@ -68,47 +68,33 @@ function renderProjectLink(relativePath, project, imageClass, titleClass) {
 </a>`;
 }
 
-function renderColumnProject(relativePath, project) {
-  return `<div class="w-container">
-  <a href="${escapeHtml(resolveHref(relativePath, `projects/${project.slug}/index.html`))}" class="project-link-block w-inline-block">
-    <img src="${escapeHtml(resolveAsset(relativePath, project.thumbnail))}" loading="lazy" alt="${escapeHtml(project.thumbnailAlt)}" class="image-38">
-    <div class="work-page-project-name">${escapeHtml(project.title)}</div>
-  </a>
-</div>`;
-}
-
 function renderHomeSection(relativePath, section, projectMap) {
-  const featureRows = (section.featureRows || [])
-    .map((row) => `<div class="work-essentials-columns w-row">
-${row
-  .map((slug) => projectMap[slug])
-  .filter(Boolean)
+  const slugs = [...(section.featureRows || []).flat(), ...(section.columns || []).flat()];
+  const seen = new Set();
+  const items = slugs
+    .filter((slug) => {
+      if (seen.has(slug)) {
+        return false;
+      }
+      seen.add(slug);
+      return true;
+    })
+    .map((slug) => projectMap[slug])
+    .filter(Boolean);
+
+  return `<h1 id="${escapeHtml(section.id)}" class="works-page-heading">${escapeHtml(section.title)}</h1>
+<div class="design-project-grid">
+${items
   .map(
-    (project) => `  <div class="work-column w-col w-col-6">
-    ${renderProjectLink(relativePath, project, "image-100", "project-name-link")}
+    (project) => `  <div class="design-project-grid-item">
+    <a href="${escapeHtml(resolveHref(relativePath, `projects/${project.slug}/index.html`))}" class="design-unified-card">
+      <img src="${escapeHtml(resolveAsset(relativePath, project.thumbnail))}" loading="lazy" alt="${escapeHtml(project.thumbnailAlt)}">
+      <div class="design-card-overlay">${escapeHtml(project.title)}</div>
+    </a>
   </div>`
   )
   .join("\n")}
-</div>`)
-    .join("\n");
-
-  const columns = (section.columns || [])
-    .map((items, index) => `  <div class="column-${13 + index} w-col w-col-4">
-${items
-  .map((slug) => projectMap[slug])
-  .filter(Boolean)
-  .map((project) => `    ${renderColumnProject(relativePath, project)}`)
-  .join("\n")}
-  </div>`)
-    .join("\n");
-
-  return `<h1 id="${escapeHtml(section.id)}" class="works-page-heading">${escapeHtml(section.title)}</h1>
-${featureRows ? `<div class="work-essentials-copy">
-${featureRows}
-</div>` : ""}
-${columns ? `<div class="work-columns w-row">
-${columns}
-</div>` : ""}`;
+</div>`;
 }
 
 function renderHomeFooter(relativePath) {

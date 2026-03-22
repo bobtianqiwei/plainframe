@@ -6,7 +6,7 @@ module.exports = {
   discipline: "Digital archive / Interface design",
   summary:
     "A browsing system for a living visual archive, designed to balance strict structure with an open sense of exploration.",
-  thumbnail: "assets/images/design/archive-grid.svg",
+  thumbnail: "assets/images/design/art/archive-grid.jpg",
   thumbnailAlt: "Archive Grid poster",
   order: 2,
   page: {

@@ -6,7 +6,7 @@ module.exports = {
   discipline: "Brand system / Editorial direction",
   summary:
     "A restrained identity system for a material research studio, built around texture, spacing, and typographic restraint.",
-  thumbnail: "assets/images/design/quiet-material.svg",
+  thumbnail: "assets/images/design/art/quiet-material.jpg",
   thumbnailAlt: "Quiet Material poster",
   order: 1,
   page: {

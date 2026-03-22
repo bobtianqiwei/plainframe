@@ -6,7 +6,7 @@ module.exports = {
   discipline: "Product design / Motion direction",
   summary:
     "A set of interface studies for a communication tool where motion, feedback, and silence all shape the emotional tone.",
-  thumbnail: "assets/images/design/soft-signals.svg",
+  thumbnail: "assets/images/design/art/soft-signals.jpg",
   thumbnailAlt: "Soft Signals poster",
   order: 3,
   page: {

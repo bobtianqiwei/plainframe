@@ -17,10 +17,21 @@ module.exports = {
   hero: {
     eyebrow: "Minimal design portfolio template",
     title: "Plainframe",
+    titleLines: ["Plainframe"],
     subtitle:
       "A quiet portfolio system for visual designers, product designers, art directors, and creative technologists.",
     statement:
       "Large type. Simple rhythm. Work first."
+  },
+  vision: {
+    image: "assets/images/design/art/quiet-material.jpg",
+    imageAlt: "Quiet Material poster",
+    caption: "Gustav Klimt, The Kiss, 1907-1908",
+    references: [
+      "James J. Gibson, The Ecological Approach to Visual Perception (1979)",
+      "Dieter Rams, As Little Design as Possible",
+      "John Cage, Silence (1961)"
+    ]
   },
   intro: {
     title: "A calmer way to show design work.",
@@ -36,6 +47,81 @@ module.exports = {
     bio:
       "Avery Lin designs digital products, brand systems, and spatial graphics. Their work focuses on visual clarity, editorial rhythm, and interfaces that feel precise without feeling cold."
   },
+  testimonials: [
+    {
+      quote:
+        "Plainframe keeps the work legible and quiet without making the portfolio feel empty.",
+      credit: "Template note"
+    },
+    {
+      quote:
+        "The structure is minimal, but the rhythm still feels considered.",
+      credit: "Template note"
+    }
+  ],
+  homeSections: [
+    {
+      id: "design-id",
+      title: "OBJECTS",
+      featureRows: [
+        ["quiet-material", "archive-grid"]
+      ],
+      columns: [
+        ["soft-signals"],
+        ["north-window"],
+        ["paper-room"]
+      ]
+    },
+    {
+      id: "design-software",
+      title: "INTERFACES",
+      featureRows: [
+        ["soft-signals", "archive-grid"]
+      ],
+      columns: [
+        ["quiet-material"],
+        ["north-window"],
+        ["paper-room"]
+      ]
+    },
+    {
+      id: "design-installations",
+      title: "INSTALLATIONS",
+      columns: [
+        ["paper-room"],
+        ["north-window"],
+        ["quiet-material"]
+      ]
+    }
+  ],
+  cvSections: [
+    {
+      title: "Practice",
+      items: [
+        {
+          heading: "Independent designer",
+          body: "Visual systems, digital products, and editorial direction"
+        },
+        {
+          heading: "Plainframe",
+          body: "Minimal design portfolio template for calm, work-first presentation"
+        }
+      ]
+    },
+    {
+      title: "Contact",
+      items: [
+        {
+          heading: "Email",
+          body: "hello@example.com"
+        },
+        {
+          heading: "Location",
+          body: "Brooklyn, New York"
+        }
+      ]
+    }
+  ],
   aboutPage: {
     headline:
       "A short biography page for designers who want a little context without turning the site into a personal essay.",

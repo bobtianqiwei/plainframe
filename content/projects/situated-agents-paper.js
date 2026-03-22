@@ -6,7 +6,7 @@ module.exports = {
   discipline: "Editorial design / Installation",
   summary:
     "A print-led installation that turns editorial sequencing into a room-scale visual system.",
-  thumbnail: "assets/images/design/paper-room.svg",
+  thumbnail: "assets/images/design/art/paper-room.jpg",
   thumbnailAlt: "Paper Room poster",
   order: 5,
   page: {

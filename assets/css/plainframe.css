@@ -1,10 +1,35 @@
 /* plainframe.css developed by Bob Tianqi Wei */
 
+@font-face {
+  font-family: "Publicsans Variablefont Wght";
+  src: url("../fonts/PublicSans-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Publicsans Variablefont Wght";
+  src: url("../fonts/PublicSans-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope Variablefont Wght";
+  src: url("../fonts/Manrope-VariableFont_wght.ttf") format("truetype");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 body.design-portfolio-page,
 body.design-project-page {
   --design-footer-height: 52px;
   background: #f5f5f5;
   color: #111;
+  font-family: "Publicsans Variablefont Wght", Arial, sans-serif;
   margin: 0;
 }
 
@@ -46,6 +71,8 @@ body.design-portfolio-page .design-hero-inner {
   align-items: flex-start;
   gap: 18px;
   width: min(1120px, calc(100vw - 72px));
+  opacity: 0;
+  animation: designHeroFadeIn .5s ease-out forwards;
 }
 
 body.design-portfolio-page .design-hero.design-hero-compact .design-hero-inner {
@@ -58,6 +85,7 @@ body.design-portfolio-page .design-hero.design-hero-compact .design-hero-inner {
 body.design-portfolio-page .design-hero-eyebrow {
   margin: 0;
   color: #777;
+  font-family: "Publicsans Variablefont Wght", Arial, sans-serif;
   font-size: 13px;
   font-weight: 300;
   letter-spacing: 0.04em;
@@ -67,6 +95,7 @@ body.design-portfolio-page .design-hero-eyebrow {
 body.design-portfolio-page .design-hero-title {
   margin: 0;
   color: #4a4a4a;
+  font-family: "Publicsans Variablefont Wght", Arial, sans-serif;
   text-align: left;
   font-size: 92px;
   font-weight: 100;
@@ -82,6 +111,7 @@ body.design-portfolio-page .design-hero-title-line {
 body.design-portfolio-page .design-hero-name {
   margin: 0;
   color: #333;
+  font-family: "Publicsans Variablefont Wght", Arial, sans-serif;
   align-self: stretch;
   text-align: right;
   font-size: 30px;
@@ -106,6 +136,31 @@ body.design-portfolio-page .design-hero-scroll {
 body.design-portfolio-page .design-hero-scroll svg {
   width: 10px;
   height: 40px;
+}
+
+body.design-portfolio-page .design-hero-scroll:hover {
+  color: #444;
+}
+
+body.design-portfolio-page .design-section-scroll {
+  display: flex;
+  justify-content: center;
+  margin: 18px 0 28px;
+}
+
+body.design-portfolio-page .design-section-scroll .design-hero-scroll {
+  position: static;
+  transform: none;
+}
+
+@keyframes designHeroFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 body.design-portfolio-page .design-vision,
@@ -135,6 +190,13 @@ body.design-portfolio-page .design-vision-grid {
   grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
   gap: 36px;
   align-items: start;
+  width: min(1400px, 100%);
+}
+
+body.design-portfolio-page .design-vision-media,
+body.design-portfolio-page .design-vision-copy,
+body.design-portfolio-page .design-project-grid-item {
+  min-width: 0;
 }
 
 body.design-portfolio-page .design-vision-image {
@@ -147,6 +209,7 @@ body.design-portfolio-page .design-vision-image {
 body.design-portfolio-page .design-vision-heading {
   margin: 0 0 16px;
   color: #333;
+  font-family: "Publicsans Variablefont Wght", Arial, sans-serif;
   font-size: 24px;
   font-weight: 300;
   line-height: 1.2;
@@ -166,6 +229,7 @@ body.design-portfolio-page .design-vision-text p {
 body.design-portfolio-page .design-testimonials-heading {
   margin: 0 0 36px;
   color: #333;
+  font-family: "Publicsans Variablefont Wght", Arial, sans-serif;
   font-size: 18px;
   font-weight: 300;
   line-height: 1.2;
@@ -186,6 +250,7 @@ body.design-portfolio-page .design-testimonial {
 body.design-portfolio-page .design-testimonial-quote {
   margin: 0 0 16px;
   color: #2f2f2f;
+  font-family: "Publicsans Variablefont Wght", Arial, sans-serif;
   font-size: 28px;
   font-weight: 200;
   line-height: 1.2;
@@ -210,8 +275,13 @@ body.design-portfolio-page .design-project-grid {
 body.design-portfolio-page .design-project-grid-item > a.design-unified-card {
   position: relative;
   display: block;
+  height: auto !important;
   overflow: hidden;
   background: #ddd;
+}
+
+body.design-portfolio-page .design-project-grid-item > a {
+  width: 100%;
 }
 
 body.design-portfolio-page .design-project-grid-item > a.design-unified-card img {
@@ -235,6 +305,7 @@ body.design-portfolio-page .design-card-overlay {
   justify-content: center;
   padding: 20px;
   color: #fff;
+  font-family: "Publicsans Variablefont Wght", Arial, sans-serif;
   text-align: center;
   font-size: 24px;
   font-weight: 300;
@@ -275,6 +346,7 @@ body.design-portfolio-page .design-project-grid-item > a.design-unified-card:hov
 .design-project-title {
   margin: 0;
   color: #111;
+  font-family: "Publicsans Variablefont Wght", Arial, sans-serif;
   font-size: 56px;
   font-weight: 200;
   line-height: 1;
@@ -310,6 +382,15 @@ body.design-portfolio-page .design-project-grid-item > a.design-unified-card:hov
   width: 100%;
 }
 
+.design-project-hero .image-description {
+  margin-top: 10px;
+  color: #777;
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
 .design-project-section {
   display: grid;
   grid-template-columns: 180px minmax(0, 1fr);
@@ -319,9 +400,14 @@ body.design-portfolio-page .design-project-grid-item > a.design-unified-card:hov
   border-top: 1px solid #e7e7e7;
 }
 
+.design-project-section:first-of-type {
+  margin-top: 0;
+}
+
 .design-project-section-title {
   margin: 0;
   color: #222;
+  font-family: "Publicsans Variablefont Wght", Arial, sans-serif;
   font-size: 18px;
   font-weight: 300;
   line-height: 1.2;
@@ -414,8 +500,9 @@ body.design-portfolio-page .design-project-grid-item > a.design-unified-card:hov
 
 .design-ekphrasis-wordmark {
   color: #333;
+  font-family: "Publicsans Variablefont Wght", Arial, sans-serif;
   font-size: 17px;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1.2;
 }
 
@@ -428,8 +515,9 @@ body.design-portfolio-page .design-project-grid-item > a.design-unified-card:hov
   border-radius: 8px;
   background: #fff;
   color: #333;
-  font-family: Arial, sans-serif;
+  font-family: "Publicsans Variablefont Wght", Arial, sans-serif;
   font-size: 13px;
+  font-weight: 300;
   line-height: 1.2;
   text-decoration: none;
   box-sizing: border-box;
@@ -464,14 +552,55 @@ body.design-portfolio-page .design-project-grid-item > a.design-unified-card:hov
     width: 100%;
   }
 
+  body.design-portfolio-page .design-vision-media {
+    order: 2;
+  }
+
+  body.design-portfolio-page .design-vision-image {
+    max-height: 34vh;
+  }
+
+  body.design-portfolio-page .design-vision-heading {
+    margin-bottom: 12px;
+    font-size: 20px;
+  }
+
+  body.design-portfolio-page .design-vision-text {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
   body.design-portfolio-page .design-hero-title {
-    font-size: 52px;
+    width: 100%;
+    font-size: clamp(32px, 8.8vw, 48px);
+    letter-spacing: -0.02em;
     white-space: normal;
+    text-wrap: balance;
+  }
+
+  body.design-portfolio-page .design-hero-title-line {
+    display: inline;
+  }
+
+  body.design-portfolio-page .design-hero-title-line::after {
+    content: " ";
+  }
+
+  body.design-portfolio-page .design-hero-title-line:last-child::after {
+    content: "";
   }
 
   body.design-portfolio-page .design-hero-name {
     font-size: 20px;
-    text-align: left;
+    font-weight: 200;
+  }
+
+  body.design-portfolio-page .design-hero-scroll {
+    bottom: 18px;
+  }
+
+  body.design-portfolio-page .design-section-scroll {
+    margin: 8px 0 20px;
   }
 
   body.design-portfolio-page .design-vision-grid,
@@ -514,17 +643,42 @@ body.design-portfolio-page .design-project-grid-item > a.design-unified-card:hov
   .design-ekphrasis-footer-left {
     grid-column: 1;
     grid-row: 1;
+    min-width: 0;
   }
 
   .design-ekphrasis-footer-center {
     grid-column: 1 / -1;
     grid-row: 2;
+    gap: 6px;
     justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .design-ekphrasis-footer-center::-webkit-scrollbar {
+    display: none;
   }
 
   .design-ekphrasis-footer-right {
     grid-column: 2;
     grid-row: 1;
     justify-content: flex-end;
+  }
+
+  .design-ekphrasis-link {
+    flex: 0 0 auto;
+  }
+
+  body.design-portfolio-page .design-project-grid-item > a.design-unified-card .design-card-overlay {
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 16px;
+    font-size: 18px;
+    text-align: left;
+    opacity: 1;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 42%, rgba(0, 0, 0, 0.54) 100%);
   }
 }

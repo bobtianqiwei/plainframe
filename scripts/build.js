@@ -60,7 +60,105 @@ function renderParagraphs(paragraphs) {
     .join("");
 }
 
-function pageShell({ relativePath, title, description, bodyClass, body }) {
+function renderProjectLink(relativePath, project, imageClass, titleClass) {
+  return `<a href="${escapeHtml(resolveHref(relativePath, `projects/${project.slug}/index.html`))}" class="work-image-link w-inline-block">
+  <div class="w-layout-blockcontainer w-container"><img src="${escapeHtml(resolveAsset(relativePath, project.thumbnail))}" loading="lazy" alt="${escapeHtml(project.thumbnailAlt)}" class="${imageClass}">
+    <div class="${titleClass}">${escapeHtml(project.title)}</div>
+  </div>
+</a>`;
+}
+
+function renderColumnProject(relativePath, project) {
+  return `<div class="w-container">
+  <a href="${escapeHtml(resolveHref(relativePath, `projects/${project.slug}/index.html`))}" class="project-link-block w-inline-block">
+    <img src="${escapeHtml(resolveAsset(relativePath, project.thumbnail))}" loading="lazy" alt="${escapeHtml(project.thumbnailAlt)}" class="image-38">
+    <div class="work-page-project-name">${escapeHtml(project.title)}</div>
+  </a>
+</div>`;
+}
+
+function renderHomeSection(relativePath, section, projectMap) {
+  const featureRows = (section.featureRows || [])
+    .map((row) => `<div class="work-essentials-columns w-row">
+${row
+  .map((slug) => projectMap[slug])
+  .filter(Boolean)
+  .map(
+    (project) => `  <div class="work-column w-col w-col-6">
+    ${renderProjectLink(relativePath, project, "image-100", "project-name-link")}
+  </div>`
+  )
+  .join("\n")}
+</div>`)
+    .join("\n");
+
+  const columns = (section.columns || [])
+    .map((items, index) => `  <div class="column-${13 + index} w-col w-col-4">
+${items
+  .map((slug) => projectMap[slug])
+  .filter(Boolean)
+  .map((project) => `    ${renderColumnProject(relativePath, project)}`)
+  .join("\n")}
+  </div>`)
+    .join("\n");
+
+  return `<h1 id="${escapeHtml(section.id)}" class="works-page-heading">${escapeHtml(section.title)}</h1>
+${featureRows ? `<div class="work-essentials-copy">
+${featureRows}
+</div>` : ""}
+${columns ? `<div class="work-columns w-row">
+${columns}
+</div>` : ""}`;
+}
+
+function renderHomeFooter(relativePath) {
+  return `<footer class="design-ekphrasis-footer">
+  <div class="design-ekphrasis-footer-left">
+    <a href="#works-head" class="design-ekphrasis-logo-link" aria-label="Back to hero">
+      <div class="design-ekphrasis-logo-mark">P</div>
+    </a>
+    <div class="design-ekphrasis-wordmark">Plainframe</div>
+  </div>
+  <div class="design-ekphrasis-footer-center">
+    <a href="#design-vision" class="design-ekphrasis-link">Vision</a>
+    <a href="#design-id" class="design-ekphrasis-link">Objects</a>
+    <a href="#design-software" class="design-ekphrasis-link">Interfaces</a>
+    <a href="#design-installations" class="design-ekphrasis-link">Installations</a>
+  </div>
+  <div class="design-ekphrasis-footer-right">
+    <a href="${escapeHtml(resolveHref(relativePath, "about/index.html"))}" class="design-ekphrasis-link">About</a>
+    <a href="${escapeHtml(resolveHref(relativePath, siteConfig.site.footerLinkHref))}" target="_blank" rel="noreferrer" class="design-ekphrasis-link">${escapeHtml(siteConfig.site.footerLinkLabel)}</a>
+  </div>
+</footer>`;
+}
+
+function renderProjectFooter(relativePath) {
+  return `<footer class="design-ekphrasis-footer">
+  <div class="design-ekphrasis-footer-left">
+    <a href="${escapeHtml(resolveHref(relativePath, "index.html"))}" class="design-ekphrasis-logo-link" aria-label="Back to design index">
+      <div class="design-ekphrasis-logo-mark">P</div>
+    </a>
+    <div class="design-ekphrasis-wordmark">Plainframe</div>
+    <a href="${escapeHtml(resolveHref(relativePath, "index.html"))}" class="design-ekphrasis-link design-ekphrasis-link-icon design-project-back" aria-label="BACK TO DESIGN">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M10.5 3.75L6.25 8L10.5 12.25" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+  <div class="design-ekphrasis-footer-center">
+    <a href="${escapeHtml(resolveHref(relativePath, "index.html#design-vision"))}" class="design-ekphrasis-link">Vision</a>
+    <a href="${escapeHtml(resolveHref(relativePath, "index.html#design-id"))}" class="design-ekphrasis-link">Objects</a>
+    <a href="${escapeHtml(resolveHref(relativePath, "index.html#design-software"))}" class="design-ekphrasis-link">Interfaces</a>
+    <a href="${escapeHtml(resolveHref(relativePath, "index.html#design-installations"))}" class="design-ekphrasis-link">Installations</a>
+  </div>
+  <div class="design-ekphrasis-footer-right">
+    <a href="${escapeHtml(resolveHref(relativePath, "about/index.html"))}" class="design-ekphrasis-link">About</a>
+    <a href="${escapeHtml(resolveHref(relativePath, siteConfig.site.footerLinkHref))}" target="_blank" rel="noreferrer" class="design-ekphrasis-link">${escapeHtml(siteConfig.site.footerLinkLabel)}</a>
+  </div>
+</footer>`;
+}
+
+function pageShell({ relativePath, title, description, bodyAttributes = "", bodyClass = "", body }) {
   return `<!-- index.html developed by Bob Tianqi Wei -->
 <!DOCTYPE html>
 <html lang="en">
@@ -69,103 +167,89 @@ function pageShell({ relativePath, title, description, bodyClass, body }) {
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(description)}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <link href="${escapeHtml(resolveAsset(relativePath, "assets/css/normalize.css"))}" rel="stylesheet" type="text/css">
+  <link href="${escapeHtml(resolveAsset(relativePath, "assets/css/theme-toggle.css"))}" rel="stylesheet" type="text/css">
+  <link href="${escapeHtml(resolveAsset(relativePath, "assets/css/webflow.css"))}" rel="stylesheet" type="text/css">
+  <link href="${escapeHtml(resolveAsset(relativePath, "assets/css/bobtianqiwei.webflow.css"))}" rel="stylesheet" type="text/css">
+  <link href="${escapeHtml(resolveAsset(relativePath, "assets/css/project-pages.css"))}" rel="stylesheet" type="text/css">
+  <link href="${escapeHtml(resolveAsset(relativePath, "assets/css/project-pages-design.css"))}" rel="stylesheet" type="text/css">
   <link href="${escapeHtml(resolveAsset(relativePath, "assets/css/plainframe.css"))}" rel="stylesheet" type="text/css">
 </head>
-<body class="${escapeHtml(bodyClass)}">
+<body${bodyAttributes ? ` ${bodyAttributes}` : ""} class="${escapeHtml(bodyClass)}">
 ${body}
 </body>
 </html>
 `;
 }
 
-function renderFooter(relativePath, currentLabel) {
-  return `<footer class="design-ekphrasis-footer">
-  <div class="design-ekphrasis-footer-left">
-    <a href="${escapeHtml(resolveHref(relativePath, "index.html"))}" class="design-ekphrasis-logo-link" aria-label="Back to Plainframe home">
-      <div class="design-ekphrasis-logo-mark">P</div>
-    </a>
-    <div class="design-ekphrasis-wordmark">Plainframe</div>
-  </div>
-  <div class="design-ekphrasis-footer-center">
-    <a href="${escapeHtml(resolveHref(relativePath, "index.html#design-vision"))}" class="design-ekphrasis-link">${currentLabel || "Vision"}</a>
-    <a href="${escapeHtml(resolveHref(relativePath, "projects/index.html"))}" class="design-ekphrasis-link">Work</a>
-    <a href="${escapeHtml(resolveHref(relativePath, "about/index.html"))}" class="design-ekphrasis-link">About</a>
-  </div>
-  <div class="design-ekphrasis-footer-right">
-    <a href="${escapeHtml(resolveHref(relativePath, siteConfig.site.footerLinkHref))}" target="_blank" rel="noreferrer" class="design-ekphrasis-link">${escapeHtml(siteConfig.site.footerLinkLabel)}</a>
-  </div>
-</footer>`;
-}
-
 function renderHome(projects) {
   const relativePath = "index.html";
-  const heroImage = projects[0] ? resolveAsset(relativePath, projects[0].thumbnail) : "";
-  const heroImageAlt = projects[0] ? projects[0].thumbnailAlt : "";
+  const projectMap = Object.fromEntries(projects.map((project) => [project.slug, project]));
+  const heroLines = siteConfig.hero.titleLines || [siteConfig.hero.title];
 
   return pageShell({
     relativePath,
     title: siteConfig.site.metaTitle,
     description: siteConfig.site.metaDescription,
-    bodyClass: "design-portfolio-page",
+    bodyAttributes: 'data-scroll-time="0"',
+    bodyClass: "body-4 design-portfolio-page",
     body: `<div class="design-portfolio-scroll">
-  <section class="design-hero" id="design-hero">
-    <div class="design-hero-inner">
-      <p class="design-hero-eyebrow">${escapeHtml(siteConfig.hero.eyebrow)}</p>
-      <h1 class="design-hero-title"><span class="design-hero-title-line">${escapeHtml(siteConfig.hero.title)}</span></h1>
-      <p class="design-hero-name">${escapeHtml(siteConfig.hero.subtitle)}</p>
-    </div>
-    <a href="#design-vision" class="design-hero-scroll" aria-label="Scroll to next section">
-      <svg viewBox="0 0 12 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M6 1V37" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-        <path d="M2 33L6 38L10 33" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
-  </section>
-  <section class="design-vision" id="design-vision">
-    <div class="design-vision-grid">
-      <div class="design-vision-media">
-        <img src="${escapeHtml(heroImage)}" alt="${escapeHtml(heroImageAlt)}" class="design-vision-image">
+  <article class="work-page-div-block">
+    <section class="design-hero">
+      <div class="design-hero-inner">
+        <h1 id="works-head" class="design-page-title design-hero-title">
+${heroLines.map((line) => `          <span class="design-hero-title-line">${escapeHtml(line)}</span>`).join("\n")}
+        </h1>
+        <p class="name-text design-hero-name">${escapeHtml(siteConfig.hero.subtitle)}</p>
       </div>
-      <div class="design-vision-copy">
-        <h2 class="design-vision-heading">${escapeHtml(siteConfig.intro.title)}</h2>
-        <div class="design-vision-text">${renderParagraphs(siteConfig.intro.paragraphs)}</div>
+      <a href="#design-vision" class="design-hero-scroll" aria-label="Scroll down">
+        <svg viewBox="0 0 12 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M6 1V35" stroke="currentColor" stroke-width="1"/>
+          <path d="M1.5 30.5L6 35L10.5 30.5" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </a>
+    </section>
+    <section id="design-vision" class="design-vision">
+      <div class="design-vision-grid">
+        <div class="design-vision-media">
+          <img src="${escapeHtml(resolveAsset(relativePath, siteConfig.vision.image))}" loading="lazy" alt="${escapeHtml(siteConfig.vision.imageAlt)}" class="design-vision-image">
+          <div class="design-vision-caption">${escapeHtml(siteConfig.vision.caption)}</div>
+          <div class="design-vision-references">${siteConfig.vision.references.map((item) => escapeHtml(item)).join("<br>")}</div>
+        </div>
+        <div class="design-vision-copy">
+          <h2 class="design-vision-heading">${escapeHtml(siteConfig.intro.title)}</h2>
+          <div class="design-vision-text">${renderParagraphs(siteConfig.intro.paragraphs)}</div>
+        </div>
       </div>
-    </div>
-  </section>
-  <section class="design-work" id="design-work">
-    <div class="design-work-inner">
-      <h2 class="design-testimonials-heading">Selected Work</h2>
-      <div class="design-project-grid">
-${projects
+      <a href="#design-id" class="design-hero-scroll" aria-label="Scroll down">
+        <svg viewBox="0 0 12 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M6 1V35" stroke="currentColor" stroke-width="1"/>
+          <path d="M1.5 30.5L6 35L10.5 30.5" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </a>
+    </section>
+${siteConfig.homeSections.map((section) => `    ${renderHomeSection(relativePath, section, projectMap)}`).join("\n")}
+    <section class="design-testimonials">
+      <div class="design-testimonials-inner">
+        <h2 class="design-testimonials-heading">Testimonials</h2>
+        <div class="design-testimonials-list">
+${siteConfig.testimonials
   .map(
-    (project) => `        <div class="design-project-grid-item">
-          <a href="${escapeHtml(resolveHref(relativePath, `projects/${project.slug}/index.html`))}" class="design-unified-card">
-            <img src="${escapeHtml(resolveAsset(relativePath, project.thumbnail))}" alt="${escapeHtml(project.thumbnailAlt)}">
-            <div class="design-card-overlay">${escapeHtml(project.title)}</div>
-          </a>
-        </div>`
+    (item) => `          <article class="design-testimonial">
+            <p class="design-testimonial-quote">"${escapeHtml(item.quote)}"</p>
+            <p class="design-testimonial-credit">${escapeHtml(item.credit)}</p>
+          </article>`
   )
   .join("\n")}
+        </div>
       </div>
-    </div>
-  </section>
-  <section class="design-testimonials" id="design-about">
-    <div class="design-testimonials-inner">
-      <h2 class="design-testimonials-heading">About</h2>
-      <div class="design-testimonials-list">
-        <article class="design-testimonial">
-          <p class="design-testimonial-quote">${escapeHtml(siteConfig.designer.name)}</p>
-          <p class="design-testimonial-credit">${escapeHtml(siteConfig.designer.role)}<br>${escapeHtml(siteConfig.designer.location)}</p>
-        </article>
-        <article class="design-testimonial">
-          <p class="design-testimonial-quote">“${escapeHtml(siteConfig.hero.statement)}”</p>
-          <p class="design-testimonial-credit">${escapeHtml(siteConfig.designer.bio)}</p>
-        </article>
-      </div>
-    </div>
-  </section>
+    </section>
+  </article>
 </div>
-${renderFooter(relativePath, "Vision")}`
+${renderHomeFooter(relativePath)}`
   });
 }
 
@@ -201,50 +285,43 @@ ${siteConfig.aboutPage.sections
   )
   .join("\n")}
   </main>
-${renderFooter(relativePath, "About") }
+${renderProjectFooter(relativePath)}
 </div>`
   });
 }
 
 function renderProjectsIndex(projects) {
   const relativePath = "projects/index.html";
+  const objects = siteConfig.homeSections.find((section) => section.id === "design-id");
+  const projectMap = Object.fromEntries(projects.map((project) => [project.slug, project]));
 
   return pageShell({
     relativePath,
     title: `Work | ${siteConfig.site.title}`,
     description: siteConfig.site.metaDescription,
-    bodyClass: "design-portfolio-page",
+    bodyClass: "body-4 design-portfolio-page",
     body: `<div class="design-portfolio-scroll">
-  <section class="design-hero design-hero-compact">
-    <div class="design-hero-inner">
-      <p class="design-hero-eyebrow">Projects</p>
-      <h1 class="design-hero-title"><span class="design-hero-title-line">Selected Work</span></h1>
-      <p class="design-hero-name">${escapeHtml(siteConfig.hero.subtitle)}</p>
-    </div>
-  </section>
-  <section class="design-work design-work-listing">
-    <div class="design-work-inner">
-      <div class="design-project-grid">
-${projects
-  .map(
-    (project) => `        <div class="design-project-grid-item">
-          <a href="${escapeHtml(resolveHref(relativePath, `${project.slug}/index.html`))}" class="design-unified-card">
-            <img src="${escapeHtml(resolveAsset(relativePath, project.thumbnail))}" alt="${escapeHtml(project.thumbnailAlt)}">
-            <div class="design-card-overlay">${escapeHtml(project.title)}</div>
-          </a>
-        </div>`
-  )
-  .join("\n")}
+  <article class="work-page-div-block">
+    <section class="design-hero">
+      <div class="design-hero-inner">
+        <h1 class="design-page-title design-hero-title">
+          <span class="design-hero-title-line">Selected Work</span>
+        </h1>
+        <p class="name-text design-hero-name">${escapeHtml(siteConfig.hero.subtitle)}</p>
       </div>
-    </div>
-  </section>
+    </section>
+    ${renderHomeSection(relativePath, objects, projectMap)}
+  </article>
 </div>
-${renderFooter(relativePath, "Work")}`
+${renderHomeFooter(relativePath)}`
   });
 }
 
 function renderProjectPage(project) {
   const relativePath = `projects/${project.slug}/index.html`;
+  const sections = project.page.sections || [];
+  const overview = sections[0];
+  const remainingSections = sections.slice(1);
 
   return pageShell({
     relativePath,
@@ -265,7 +342,17 @@ function renderProjectPage(project) {
     <figure class="project-figure">
       <img src="${escapeHtml(resolveAsset(relativePath, project.thumbnail))}" loading="lazy" alt="${escapeHtml(project.thumbnailAlt)}" class="design-project-gallery-image">
     </figure>
-${project.page.sections
+${overview
+  ? `    <section class="design-project-section design-project-section-intro">
+      <div class="design-project-section-head">
+        <h2 class="design-project-section-title">${escapeHtml(overview.title)}</h2>
+      </div>
+      <div class="design-project-section-body">
+        <div class="design-project-richtext">${renderParagraphs(overview.paragraphs)}</div>
+      </div>
+    </section>`
+  : ""}
+${remainingSections
   .map(
     (section) => `    <section class="design-project-section">
       <div class="design-project-section-head">
@@ -278,7 +365,7 @@ ${project.page.sections
   )
   .join("\n")}
   </main>
-${renderFooter(relativePath, "Vision")}
+${renderProjectFooter(relativePath)}
 </div>`
   });
 }
@@ -287,7 +374,6 @@ function main() {
   const projects = loadProjects();
   fs.rmSync(path.join(repoRoot, "projects"), { recursive: true, force: true });
   fs.rmSync(path.join(repoRoot, "about"), { recursive: true, force: true });
-  fs.rmSync(path.join(repoRoot, "publications"), { recursive: true, force: true });
 
   writeFile("index.html", renderHome(projects));
   writeFile("about/index.html", renderAbout());

@@ -6,7 +6,7 @@ module.exports = {
   discipline: "Spatial graphics / Exhibition design",
   summary:
     "An exhibition graphics system built around pacing, light, and quiet reading moments across a gallery sequence.",
-  thumbnail: "assets/images/design/north-window.svg",
+  thumbnail: "assets/images/design/art/north-window.jpg",
   thumbnailAlt: "North Window poster",
   order: 4,
   page: {

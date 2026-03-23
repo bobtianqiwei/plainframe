@@ -58,7 +58,7 @@ body.design-portfolio-page .work-page-div-block {
 
 body.design-portfolio-page .design-hero {
   position: relative;
-  min-height: calc(100vh - var(--design-footer-height));
+  min-height: 100vh;
   padding: 48px 24px;
   box-sizing: border-box;
 }
@@ -170,7 +170,7 @@ body.design-portfolio-page .design-section-scroll .design-hero-scroll {
 body.design-portfolio-page .design-vision,
 body.design-portfolio-page .design-testimonials,
 body.design-portfolio-page .design-work {
-  min-height: calc(100vh - var(--design-footer-height));
+  min-height: 100vh;
   display: flex;
   align-items: center;
   padding: 56px 48px 88px;
@@ -440,13 +440,14 @@ body.design-portfolio-page .design-project-grid-item > a.design-unified-card:hov
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 18px;
-  width: min(920px, calc(100% - 32px));
+  gap: 22px;
+  width: fit-content;
+  max-width: calc(100% - 32px);
   min-height: var(--design-footer-height);
-  padding: 12px 18px 10px;
+  padding: 11px 18px 10px;
   border: none;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.54);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -482,7 +483,7 @@ body.design-portfolio-page .design-project-grid-item > a.design-unified-card:hov
 .design-ekphrasis-wordmark {
   color: rgba(34, 34, 34, 0.92);
   font-size: 15px;
-  font-weight: 350;
+  font-weight: 380;
   letter-spacing: -0.01em;
   line-height: 1.2;
 }
@@ -496,10 +497,10 @@ body.design-portfolio-page .design-project-grid-item > a.design-unified-card:hov
   border: none;
   border-radius: 0;
   background: transparent;
-  color: rgba(51, 51, 51, 0.82);
+  color: rgba(51, 51, 51, 0.78);
   font-family: "Publicsans Variablefont Wght", Arial, sans-serif;
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 320;
   line-height: 1.2;
   text-decoration: none;
   box-sizing: border-box;
@@ -520,14 +521,29 @@ button.design-ekphrasis-link {
 }
 
 .design-built-with {
-  flex: 0 0 100%;
-  margin: -2px 0 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.35em;
+  width: min(560px, calc(100vw - 32px));
+  max-width: calc(100vw - 32px);
+  margin: 40px 0 0;
+  margin-left: auto;
+  margin-right: auto;
   color: rgba(102, 102, 102, 0.72);
   font-family: "Open Sans", Arial, sans-serif;
   font-size: 10px;
   font-weight: 300;
   line-height: 1.3;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.design-built-with-label,
+.design-built-with a {
+  display: inline;
+  white-space: nowrap;
 }
 
 .design-built-with a {
@@ -538,6 +554,9 @@ button.design-ekphrasis-link {
 .design-built-with-modal {
   margin-top: 18px;
   text-align: left;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 100%;
 }
 
 body.design-portfolio-page .design-about-modal-overlay,
@@ -844,8 +863,9 @@ body.design-project-page .design-cv-item strong {
 
   .design-ekphrasis-footer {
     top: 12px;
-    gap: 8px 14px;
-    width: calc(100% - 20px);
+    gap: 10px 16px;
+    width: fit-content;
+    max-width: calc(100% - 20px);
     min-height: 0;
     padding: 11px 14px 9px;
     border-radius: 24px;
@@ -880,7 +900,9 @@ body.design-project-page .design-cv-item strong {
   }
 
   .design-built-with {
-    margin-top: 2px;
+    width: min(560px, calc(100vw - 24px));
+    max-width: calc(100vw - 24px);
+    margin-top: 28px;
     text-align: center;
   }
 

@@ -238,7 +238,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 function renderBuiltWith(relativePath, className = "design-built-with") {
-  return `<p class="${className}">Built with <a href="${escapeHtml(resolveHref(relativePath, "https://github.com/bobtianqiwei/plainframe"))}" target="_blank" rel="noreferrer">github.com/bobtianqiwei/plainframe</a></p>`;
+  return `<p class="${className}"><span class="design-built-with-label">Built with</span><a href="${escapeHtml(resolveHref(relativePath, "https://github.com/bobtianqiwei/plainframe"))}" target="_blank" rel="noreferrer">github.com/bobtianqiwei/plainframe</a></p>`;
 }
 
 function renderHomeFooter(relativePath) {
@@ -253,7 +253,6 @@ function renderHomeFooter(relativePath) {
     <button type="button" class="design-ekphrasis-link" data-design-cv-open>CV</button>
     <button type="button" class="design-ekphrasis-link" data-design-about-open>About</button>
   </div>
-  ${renderBuiltWith(relativePath)}
 </footer>
 ${renderProfileModals(relativePath)}`;
 }
@@ -275,7 +274,6 @@ function renderProjectFooter(relativePath) {
     <button type="button" class="design-ekphrasis-link" data-design-cv-open>CV</button>
     <button type="button" class="design-ekphrasis-link" data-design-about-open>About</button>
   </div>
-  ${renderBuiltWith(relativePath)}
 </footer>
 ${renderProfileModals(relativePath)}`;
 }
@@ -347,12 +345,14 @@ ${heroLines.map((line) => `          <span class="design-hero-title-line">${esca
           <div class="design-vision-text">${renderParagraphs(siteConfig.intro.paragraphs)}</div>
         </div>
       </div>
-      <a href="#design-id" class="design-hero-scroll" aria-label="Scroll down">
-        <svg viewBox="0 0 12 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M6 1V35" stroke="currentColor" stroke-width="1"/>
-          <path d="M1.5 30.5L6 35L10.5 30.5" stroke="currentColor" stroke-width="1"/>
-        </svg>
-      </a>
+      <div class="design-section-scroll">
+        <a href="#design-id" class="design-hero-scroll" aria-label="Scroll down">
+          <svg viewBox="0 0 12 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M6 1V35" stroke="currentColor" stroke-width="1"/>
+            <path d="M1.5 30.5L6 35L10.5 30.5" stroke="currentColor" stroke-width="1"/>
+          </svg>
+        </a>
+      </div>
     </section>
 ${siteConfig.homeSections.map((section) => `    ${renderHomeSection(relativePath, section, projectMap)}`).join("\n")}
     <section class="design-testimonials">
@@ -370,6 +370,7 @@ ${siteConfig.testimonials
         </div>
       </div>
     </section>
+    ${renderBuiltWith(relativePath)}
   </article>
 </div>
 ${renderHomeFooter(relativePath)}`
@@ -397,6 +398,7 @@ function renderProjectsIndex(projects) {
       </div>
     </section>
     ${renderHomeSection(relativePath, objects, projectMap)}
+    ${renderBuiltWith(relativePath)}
   </article>
 </div>
 ${renderHomeFooter(relativePath)}`
@@ -450,6 +452,7 @@ ${remainingSections
     </section>`
   )
   .join("\n")}
+    ${renderBuiltWith(relativePath)}
   </main>
 ${renderProjectFooter(relativePath)}
 </div>`
